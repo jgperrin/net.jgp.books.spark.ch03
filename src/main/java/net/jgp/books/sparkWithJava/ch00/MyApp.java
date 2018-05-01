@@ -9,14 +9,14 @@ import org.apache.spark.sql.SparkSession;
  * 
  * @author jperrin
  */
-public class CsvToDataframeApp {
+public class MyApp {
 
 	/**
 	 * main() is your entry point to the application. 
 	 * @param args
 	 */
     public static void main(String[] args) {
-        CsvToDataframeApp app = new CsvToDataframeApp();
+        MyApp app = new MyApp();
         app.start();
     }
 

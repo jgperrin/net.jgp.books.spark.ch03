@@ -12,7 +12,7 @@ import static org.apache.spark.sql.functions.concat;
 /**
  * CSV ingestion in a dataframe.
  * 
- * @author jperrin
+ * @author jgp
  */
 public class IngestionSchemaManipulationApp {
 
@@ -43,6 +43,7 @@ public class IngestionSchemaManipulationApp {
     System.out.println("*** Right after ingestion");
     df.show(5);
     df.printSchema();
+    System.out.println("We have " + df.count() + " records.");
 
     // Let's transform our dataframe
     df = df.withColumn("county", lit("Wake"))

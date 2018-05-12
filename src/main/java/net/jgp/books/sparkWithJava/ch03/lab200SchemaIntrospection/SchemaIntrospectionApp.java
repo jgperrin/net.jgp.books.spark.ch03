@@ -29,9 +29,13 @@ public class SchemaIntrospectionApp {
    * The processing code.
    */
   private void start() {
+    
+    // Similar to IngestionSchemaManipulationApp (no output)
+    ////////////////////////////////////////////////////////////////////
+
     // Creates a session on a local master
     SparkSession spark = SparkSession.builder()
-        .appName("Restaurants in Wake County, NC")
+        .appName("Schema introspection for restaurants in Wake County, NC")
         .master("local")
         .getOrCreate();
 
@@ -39,10 +43,6 @@ public class SchemaIntrospectionApp {
     Dataset<Row> df = spark.read().format("csv")
         .option("header", "true")
         .load("data/Restaurants_in_Wake_County_NC.csv");
-    System.out.println("*** Right after ingestion");
-    df.show(5);
-    df.printSchema();
-    System.out.println("We have " + df.count() + " records.");
 
     // Let's transform our dataframe
     df = df.withColumn("county", lit("Wake"))
@@ -64,16 +64,17 @@ public class SchemaIntrospectionApp {
         df.col("county"), lit("_"),
         df.col("datasetId")));
 
-    // Shows at most 5 rows from the dataframe
-    System.out.println("*** Dataframe transformed");
-    df.show(5);
-    df.printSchema();
 
+    // NEW
+    ////////////////////////////////////////////////////////////////////
+    
     StructType schema = df.schema();
+    
+    System.out.println("*** Schema as a tree:");
     schema.printTreeString();
     String schemaAsString = schema.mkString();
-    System.out.println("Schema as string: " + schemaAsString);
+    System.out.println("*** Schema as string: " + schemaAsString);
     String schemaAsJson = schema.prettyJson();
-    System.out.println("Schema as JSON: " + schemaAsJson);
+    System.out.println("*** Schema as JSON: " + schemaAsJson);
   }
 }

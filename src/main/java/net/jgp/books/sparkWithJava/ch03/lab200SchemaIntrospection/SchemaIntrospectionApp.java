@@ -13,7 +13,7 @@ import org.apache.spark.sql.SparkSession;
  * 
  * @author jgp
  */
-public class IngestionSchemaManipulationApp {
+public class SchemaIntrospectionApp {
 
   /**
    * main() is your entry point to the application.
@@ -21,8 +21,8 @@ public class IngestionSchemaManipulationApp {
    * @param args
    */
   public static void main(String[] args) {
-    IngestionSchemaManipulationApp app =
-        new IngestionSchemaManipulationApp();
+    SchemaIntrospectionApp app =
+        new SchemaIntrospectionApp();
     app.start();
   }
 

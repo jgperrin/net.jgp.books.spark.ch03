@@ -7,9 +7,11 @@ import org.apache.spark.Partition;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
+import org.apache.spark.sql.types.StructField;
+import org.apache.spark.sql.types.StructType;
 
 /**
- * CSV ingestion in a dataframe.
+ * Introspection of a schema.
  * 
  * @author jgp
  */
@@ -21,8 +23,7 @@ public class SchemaIntrospectionApp {
    * @param args
    */
   public static void main(String[] args) {
-    SchemaIntrospectionApp app =
-        new SchemaIntrospectionApp();
+    SchemaIntrospectionApp app = new SchemaIntrospectionApp();
     app.start();
   }
 
@@ -70,15 +71,11 @@ public class SchemaIntrospectionApp {
     df.show(5);
     df.printSchema();
 
-    System.out.println("*** Looking at partitions");
-    Partition[] partitions = df.rdd().partitions();
-    int partitionCount = partitions.length;
-    System.out.println("Partition count before repartition: " +
-        partitionCount);
-
-    df = df.repartition(4);
-    System.out.println("Partition count after repartition: " +
-        df.rdd().partitions().length);
-
+    StructType schema = df.schema();
+    schema.printTreeString();
+    String schemaAsString = schema.mkString();
+    System.out.println("Schema as string: " + schemaAsString);
+    String schemaAsJson = schema.prettyJson();
+    System.out.println("Schema as JSON: " + schemaAsJson);
   }
 }

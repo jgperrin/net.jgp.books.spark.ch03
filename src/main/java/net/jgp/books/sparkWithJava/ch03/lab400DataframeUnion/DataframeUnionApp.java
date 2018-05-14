@@ -46,8 +46,8 @@ public class DataframeUnionApp {
   /**
    * Performs the union between the two dataframes.
    * 
-   * @param df1
-   * @param df2
+   * @param df1 Dataframe to union on
+   * @param df2 Dataframe to union from
    */
   private void combineDataframes(Dataset<Row> df1, Dataset<Row> df2) {
     Dataset<Row> df = df1.unionByName(df2);

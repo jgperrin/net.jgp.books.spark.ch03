@@ -36,7 +36,8 @@ public class IngestionSchemaManipulationApp {
         .master("local")
         .getOrCreate();
 
-    // Reads a CSV file with header, called books.csv, stores it in a dataframe
+    // Reads a CSV file with header, called Restaurants_in_Wake_County_NC.csv,
+    // stores it in a dataframe
     Dataset<Row> df = spark.read().format("csv")
         .option("header", "true")
         .load("data/Restaurants_in_Wake_County_NC.csv");

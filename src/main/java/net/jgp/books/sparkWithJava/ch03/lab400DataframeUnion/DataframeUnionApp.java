@@ -1,4 +1,4 @@
-package net.jgp.books.sparkWithJava.ch03.lab300JsonIngestionSchemaManipulation;
+package net.jgp.books.sparkWithJava.ch03.lab400DataframeUnion;
 
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
@@ -14,7 +14,8 @@ import org.apache.spark.Partition;
  * 
  * @author jgp
  */
-public class JsonIngestionSchemaManipulationApp {
+public class DataframeUnionApp {
+  private SparkSession spark;
 
   /**
    * main() is your entry point to the application.
@@ -22,8 +23,8 @@ public class JsonIngestionSchemaManipulationApp {
    * @param args
    */
   public static void main(String[] args) {
-    JsonIngestionSchemaManipulationApp app =
-        new JsonIngestionSchemaManipulationApp();
+    DataframeUnionApp app =
+        new DataframeUnionApp();
     app.start();
   }
 
@@ -32,20 +33,56 @@ public class JsonIngestionSchemaManipulationApp {
    */
   private void start() {
     // Creates a session on a local master
-    SparkSession spark = SparkSession.builder()
+    spark = SparkSession.builder()
         .appName("Restaurants in Durham County, NC")
         .master("local")
         .getOrCreate();
 
-    // Reads a JSON file called Restaurants_in_Durham_County_NC.json, stores it
-    // in a dataframe
-    Dataset<Row> df = spark.read().format("json")
-        .load("data/Restaurants_in_Durham_County_NC.json");
-    System.out.println("*** Right after ingestion");
+    Dataset<Row> wakeRestaurantsDf = buildWakeRestaurantsDataframe();
+    Dataset<Row> durhamRestaurantsDf = buildDurhamRestaurantsDataframe();
+    
+    Dataset<Row> df = wakeRestaurantsDf.union(durhamRestaurantsDf);
     df.show(5);
     df.printSchema();
     System.out.println("We have " + df.count() + " records.");
+  }
 
+  /**
+   * Builds the dataframe containing the Wake county restaurants
+   * @return
+   */
+  private Dataset<Row> buildWakeRestaurantsDataframe() {
+    Dataset<Row> df = spark.read().format("csv")
+        .option("header", "true")
+        .load("data/Restaurants_in_Wake_County_NC.csv");
+    df = df.withColumn("county", lit("Wake"))
+        .withColumnRenamed("HSISID", "datasetId")
+        .withColumnRenamed("NAME", "name")
+        .withColumnRenamed("ADDRESS1", "address1")
+        .withColumnRenamed("ADDRESS2", "address2")
+        .withColumnRenamed("CITY", "city")
+        .withColumnRenamed("STATE", "state")
+        .withColumnRenamed("POSTALCODE", "zip")
+        .withColumnRenamed("PHONENUMBER", "tel")
+        .withColumnRenamed("RESTAURANTOPENDATE", "dateStart")
+        .withColumnRenamed("FACILITYTYPE", "type")
+        .withColumnRenamed("X", "geoX")
+        .withColumnRenamed("Y", "geoY");
+    df = df.withColumn("id", concat(
+        df.col("state"),
+        lit("_"),
+        df.col("county"), lit("_"),
+        df.col("datasetId")));
+    return df;
+  }
+
+  /**
+   * Builds the dataframe containing the Durham county restaurants
+   * @return
+   */
+  private Dataset<Row> buildDurhamRestaurantsDataframe() {
+    Dataset<Row> df = spark.read().format("json")
+        .load("data/Restaurants_in_Durham_County_NC.json");
     df = df.withColumn("county", lit("Durham"))
         .withColumn("datasetId", df.col("fields.id"))
         .withColumn("name", df.col("fields.premise_name"))
@@ -65,19 +102,6 @@ public class JsonIngestionSchemaManipulationApp {
         concat(df.col("state"), lit("_"),
             df.col("county"), lit("_"),
             df.col("datasetId")));
-
-    System.out.println("*** Dataframe transformed");
-    df.show(5);
-    df.printSchema();
-
-    System.out.println("*** Looking at partitions");
-    Partition[] partitions = df.rdd().partitions();
-    int partitionCount = partitions.length;
-    System.out.println("Partition count before repartition: " +
-        partitionCount);
-
-    df = df.repartition(4);
-    System.out.println("Partition count after repartition: " +
-        df.rdd().partitions().length);
+    return df;
   }
 }

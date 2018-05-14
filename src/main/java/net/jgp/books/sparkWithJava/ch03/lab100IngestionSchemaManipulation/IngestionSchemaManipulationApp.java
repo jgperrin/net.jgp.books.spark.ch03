@@ -79,6 +79,5 @@ public class IngestionSchemaManipulationApp {
     df = df.repartition(4);
     System.out.println("Partition count after repartition: " +
         df.rdd().partitions().length);
-
   }
 }

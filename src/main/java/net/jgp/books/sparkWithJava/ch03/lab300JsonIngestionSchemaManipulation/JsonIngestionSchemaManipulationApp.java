@@ -10,7 +10,7 @@ import static org.apache.spark.sql.functions.split;
 /**
  * CSV ingestion in a dataframe.
  * 
- * @author jperrin
+ * @author jgp
  */
 public class JsonIngestionSchemaManipulationApp {
 
@@ -49,7 +49,8 @@ public class JsonIngestionSchemaManipulationApp {
     df = df.withColumn("tel", df.col("fields.premise_zip"));
     df = df.withColumn("dateStart", df.col("fields.opening_date"));
     df = df.withColumn("dateEnd", df.col("fields.closing_date"));
-    df = df.withColumn("type", split(df.col("fields.type_description"), " - ").getItem(1));
+    df = df.withColumn("type",
+        split(df.col("fields.type_description"), " - ").getItem(1));
     df = df.withColumn("geoX", df.col("fields.geolocation").getItem(0));
     df = df.withColumn("geoY", df.col("fields.geolocation").getItem(1));
     df = df.withColumn("id", concat(
@@ -59,6 +60,5 @@ public class JsonIngestionSchemaManipulationApp {
     // Shows at most 5 rows from the dataframe
     df.show(5);
     df.printSchema();
-    
   }
 }

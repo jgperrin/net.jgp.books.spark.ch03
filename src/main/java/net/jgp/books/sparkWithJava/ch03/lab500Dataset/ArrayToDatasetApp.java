@@ -27,7 +27,8 @@ public class ArrayToDatasetApp {
 
     String[] l = new String[] { "a", "b", "c", "d" };
     List<String> data = Arrays.asList(l);
-    Dataset<String> df = spark.createDataset(data, Encoders.STRING());
-    df.show();
+    Dataset<String> ds = spark.createDataset(data, Encoders.STRING());
+    ds.show();
+    ds.printSchema();
   }
 }

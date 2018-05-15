@@ -40,14 +40,14 @@ public class CsvToDatasetBookToDataframeApp implements Serializable {
       b.setId(value.getAs("id"));
       b.setAuthorId(value.getAs("authorId"));
       b.setLink(value.getAs("link"));
-      SimpleDateFormat parser = new SimpleDateFormat("M/d/yy");
-      String stringAsDate = value.getAs("releaseDate");
-      if (stringAsDate == null) {
-        b.setReleaseDate(null);
-      } else {
-        b.setReleaseDate(parser.parse(stringAsDate));
-      }
       b.setTitle(value.getAs("title"));
+      
+      // date case
+      String dateAsString = value.getAs("releaseDate");
+      if (dateAsString != null) {
+        SimpleDateFormat parser = new SimpleDateFormat("M/d/yy");
+        b.setReleaseDate(parser.parse(dateAsString));
+      }
       return b;
     }
   }
@@ -67,8 +67,10 @@ public class CsvToDatasetBookToDataframeApp implements Serializable {
    * All the work is done here.
    */
   private void start() {
-    SparkSession spark = SparkSession.builder().appName("CSV to Dataset<Book>")
-        .master("local").getOrCreate();
+    SparkSession spark = SparkSession.builder()
+        .appName("CSV to dataframe to Dataset<Book> and back")
+        .master("local")
+        .getOrCreate();
 
     String filename = "data/books.csv";
     Dataset<Row> df = spark.read().format("csv")
@@ -80,7 +82,9 @@ public class CsvToDatasetBookToDataframeApp implements Serializable {
     df.show(5);
     df.printSchema();
 
-    Dataset<Book> bookDs = df.map(new BookMapper(), Encoders.bean(Book.class));
+    Dataset<Book> bookDs = df.map(
+        new BookMapper(),
+        Encoders.bean(Book.class));
     System.out.println("*** Books are now in a dataset of books");
     bookDs.show(5, 17);
     bookDs.printSchema();

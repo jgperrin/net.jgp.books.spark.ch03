@@ -1,4 +1,4 @@
-package net.jgp.books.sparkWithJava.ch03.lab510DatasetToDataframe;
+package net.jgp.books.sparkWithJava.ch03.lab600DatasetToDataframe;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;

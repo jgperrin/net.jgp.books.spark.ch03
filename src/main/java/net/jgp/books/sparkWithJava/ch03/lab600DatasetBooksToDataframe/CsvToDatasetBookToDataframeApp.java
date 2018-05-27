@@ -41,7 +41,7 @@ public class CsvToDatasetBookToDataframeApp implements Serializable {
       b.setAuthorId(value.getAs("authorId"));
       b.setLink(value.getAs("link"));
       b.setTitle(value.getAs("title"));
-      
+
       // date case
       String dateAsString = value.getAs("releaseDate");
       if (dateAsString != null) {
@@ -105,7 +105,7 @@ public class CsvToDatasetBookToDataframeApp implements Serializable {
             to_date(df2.col("releaseDateAsString"), "yyyy-MM-dd"))
         .drop("releaseDateAsString");
     System.out.println("*** Books are back in a dataframe");
-    df2.show(5);
+    df2.show(5, 13);
     df2.printSchema();
   }
 }

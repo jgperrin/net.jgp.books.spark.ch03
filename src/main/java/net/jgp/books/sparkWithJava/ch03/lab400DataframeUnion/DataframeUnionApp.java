@@ -10,7 +10,7 @@ import static org.apache.spark.sql.functions.split;
 import org.apache.spark.Partition;
 
 /**
- * CSV ingestion in a dataframe.
+ * Union of two dataframes.
  * 
  * @author jgp
  */
@@ -34,7 +34,7 @@ public class DataframeUnionApp {
   private void start() {
     // Creates a session on a local master
     this.spark = SparkSession.builder()
-        .appName("Restaurants in Durham County, NC")
+        .appName("Union of two dataframes")
         .master("local")
         .getOrCreate();
 

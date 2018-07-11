@@ -59,7 +59,10 @@ public class IngestionSchemaManipulationApp {
         .withColumnRenamed("RESTAURANTOPENDATE", "dateStart")
         .withColumnRenamed("FACILITYTYPE", "type")
         .withColumnRenamed("X", "geoX")
-        .withColumnRenamed("Y", "geoY");
+        .withColumnRenamed("Y", "geoY")
+        .drop("OBJECTID")
+        .drop("PERMITID")
+        .drop("GEOCODESTATUS");
     df = df.withColumn("id", concat(
         df.col("state"),
         lit("_"),
@@ -69,6 +72,19 @@ public class IngestionSchemaManipulationApp {
     // Shows at most 5 rows from the dataframe
     System.out.println("*** Dataframe transformed");
     df.show(5);
+
+    // for book only
+    Dataset<Row> dfUsedForBook = df.drop("address2")
+        .drop("zip")
+        .drop("tel")
+        .drop("dateStart")
+        .drop("geoX")
+        .drop("geoY")
+        .drop("address1")
+        .drop("datasetId");
+    dfUsedForBook.show(5, 15);
+    // end
+
     df.printSchema();
 
     System.out.println("*** Looking at partitions");

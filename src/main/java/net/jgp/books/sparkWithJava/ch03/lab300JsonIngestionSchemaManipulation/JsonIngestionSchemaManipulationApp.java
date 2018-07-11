@@ -34,7 +34,7 @@ public class JsonIngestionSchemaManipulationApp {
     // Creates a session on a local master
     SparkSession spark = SparkSession.builder()
         .appName("Restaurants in Durham County, NC")
-        .master("local")
+        .master("local[*]")
         .getOrCreate();
 
     // Reads a JSON file called Restaurants_in_Durham_County_NC.json, stores it

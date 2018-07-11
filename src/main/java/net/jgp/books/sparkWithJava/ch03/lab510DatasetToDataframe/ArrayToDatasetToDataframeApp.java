@@ -9,9 +9,9 @@ import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 
 /**
- * Converts an array to a Dataset
+ * Converts an array to a Dataframe via a Dataset
  * 
- * @author jperrin
+ * @author jgp
  */
 public class ArrayToDatasetToDataframeApp {
 
@@ -22,12 +22,13 @@ public class ArrayToDatasetToDataframeApp {
 
   private void start() {
     SparkSession spark = SparkSession.builder()
-        .appName("Array to Dataset<String>")
+        .appName("Array to dataframe")
         .master("local")
         .getOrCreate();
 
-    String[] l = new String[] { "a", "b", "c", "d" };
-    List<String> data = Arrays.asList(l);
+    String[] stringList =
+        new String[] { "Jean", "Liz", "Pierre", "Lauric" };
+    List<String> data = Arrays.asList(stringList);
     Dataset<String> ds = spark.createDataset(data, Encoders.STRING());
     ds.show();
     ds.printSchema();

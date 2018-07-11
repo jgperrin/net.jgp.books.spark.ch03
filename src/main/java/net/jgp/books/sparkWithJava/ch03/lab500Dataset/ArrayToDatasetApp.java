@@ -8,9 +8,9 @@ import org.apache.spark.sql.Encoders;
 import org.apache.spark.sql.SparkSession;
 
 /**
- * Converts an array to a Dataset
+ * Converts an array to a Dataset of strings
  * 
- * @author jperrin
+ * @author jgp
  */
 public class ArrayToDatasetApp {
 
@@ -25,8 +25,9 @@ public class ArrayToDatasetApp {
         .master("local")
         .getOrCreate();
 
-    String[] l = new String[] { "a", "b", "c", "d" };
-    List<String> data = Arrays.asList(l);
+    String[] stringList =
+        new String[] { "Jean", "Liz", "Pierre", "Lauric" };
+    List<String> data = Arrays.asList(stringList);
     Dataset<String> ds = spark.createDataset(data, Encoders.STRING());
     ds.show();
     ds.printSchema();

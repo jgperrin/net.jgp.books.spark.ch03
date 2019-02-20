@@ -1,4 +1,4 @@
-package net.jgp.books.sparkWithJava.ch03.lab600DatasetBooksToDataframe;
+package net.jgp.books.spark.ch03.lab600DatasetBooksToDataframe;
 
 import static org.apache.spark.sql.functions.concat;
 import static org.apache.spark.sql.functions.expr;
@@ -14,7 +14,7 @@ import org.apache.spark.sql.Encoders;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 
-import net.jgp.books.sparkWithJava.ch03.x.model.Book;
+import net.jgp.books.spark.ch03.x.model.Book;
 
 /**
  * This example will read a CSV file, ingest it in a dataframe, convert the

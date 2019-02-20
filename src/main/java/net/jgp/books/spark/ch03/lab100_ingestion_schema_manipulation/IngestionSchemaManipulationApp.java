@@ -1,4 +1,4 @@
-package net.jgp.books.sparkWithJava.ch03.lab100IngestionSchemaManipulation;
+package net.jgp.books.spark.ch03.lab100_ingestion_schema_manipulation;
 
 import static org.apache.spark.sql.functions.concat;
 import static org.apache.spark.sql.functions.lit;

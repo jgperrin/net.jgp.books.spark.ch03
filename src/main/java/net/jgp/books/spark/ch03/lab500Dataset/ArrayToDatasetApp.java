@@ -1,28 +1,27 @@
-package net.jgp.books.sparkWithJava.ch03.lab510DatasetToDataframe;
+package net.jgp.books.spark.ch03.lab500Dataset;
 
 import java.util.Arrays;
 import java.util.List;
 
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Encoders;
-import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 
 /**
- * Converts an array to a Dataframe via a Dataset
+ * Converts an array to a Dataset of strings
  * 
  * @author jgp
  */
-public class ArrayToDatasetToDataframeApp {
+public class ArrayToDatasetApp {
 
   public static void main(String[] args) {
-    ArrayToDatasetToDataframeApp app = new ArrayToDatasetToDataframeApp();
+    ArrayToDatasetApp app = new ArrayToDatasetApp();
     app.start();
   }
 
   private void start() {
     SparkSession spark = SparkSession.builder()
-        .appName("Array to dataframe")
+        .appName("Array to Dataset<String>")
         .master("local")
         .getOrCreate();
 
@@ -32,9 +31,5 @@ public class ArrayToDatasetToDataframeApp {
     Dataset<String> ds = spark.createDataset(data, Encoders.STRING());
     ds.show();
     ds.printSchema();
-
-    Dataset<Row> df = ds.toDF();
-    df.show();
-    df.printSchema();
   }
 }

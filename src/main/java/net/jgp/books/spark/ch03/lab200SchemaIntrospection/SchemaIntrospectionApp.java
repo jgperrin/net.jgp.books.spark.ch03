@@ -1,4 +1,4 @@
-package net.jgp.books.sparkWithJava.ch03.lab200SchemaIntrospection;
+package net.jgp.books.spark.ch03.lab200SchemaIntrospection;
 
 import static org.apache.spark.sql.functions.concat;
 import static org.apache.spark.sql.functions.lit;

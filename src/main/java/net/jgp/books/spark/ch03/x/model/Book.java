@@ -1,4 +1,4 @@
-package net.jgp.books.sparkWithJava.ch03.x.model;
+package net.jgp.books.spark.ch03.x.model;
 
 import java.util.Date;
 

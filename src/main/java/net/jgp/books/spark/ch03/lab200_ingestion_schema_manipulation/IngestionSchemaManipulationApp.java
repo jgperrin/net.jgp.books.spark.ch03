@@ -9,7 +9,7 @@ import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 
 /**
- * CSV ingestion in a dataframe.
+ * CSV ingestion in a dataframe and manipulation.
  * 
  * @author jgp
  */

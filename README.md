@@ -5,8 +5,7 @@ The examples in this repository are support to the **[Spark in Action, 2nd editi
 Welcome to Spark with Java, chapter 3. This chapter is all about the dataframe, understand its role and royalty!
 
 Labs:
- * #200
-IngestionSchemaManipulationApp: ingestion of a CSV, manipulation of schema structure post-ingestion
+ * #200: `IngestionSchemaManipulationApp`: ingestion of a CSV, manipulation of schema structure post-ingestion
 
 Notes: 
  1. Due to renaming the packages to match more closely Java standards, this project is not in sync with the book's MEAP prior to v10.

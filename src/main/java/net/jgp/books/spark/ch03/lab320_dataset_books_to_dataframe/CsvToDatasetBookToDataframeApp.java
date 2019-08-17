@@ -1,4 +1,4 @@
-package net.jgp.books.spark.ch03.lab600DatasetBooksToDataframe;
+package net.jgp.books.spark.ch03.lab320_dataset_books_to_dataframe;
 
 import static org.apache.spark.sql.functions.concat;
 import static org.apache.spark.sql.functions.expr;

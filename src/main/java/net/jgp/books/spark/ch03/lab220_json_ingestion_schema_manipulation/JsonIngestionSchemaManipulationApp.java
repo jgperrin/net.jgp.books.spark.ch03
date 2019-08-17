@@ -1,4 +1,4 @@
-package net.jgp.books.spark.ch03.lab300JsonIngestionSchemaManipulation;
+package net.jgp.books.spark.ch03.lab220_json_ingestion_schema_manipulation;
 
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;

@@ -1,4 +1,4 @@
-package net.jgp.books.spark.ch03.lab510DatasetToDataframe;
+package net.jgp.books.spark.ch03.lab310_dataset_to_dataframe;
 
 import java.util.Arrays;
 import java.util.List;

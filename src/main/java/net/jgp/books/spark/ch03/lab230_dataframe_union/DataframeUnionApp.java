@@ -1,4 +1,4 @@
-package net.jgp.books.spark.ch03.lab400DataframeUnion;
+package net.jgp.books.spark.ch03.lab230_dataframe_union;
 
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;

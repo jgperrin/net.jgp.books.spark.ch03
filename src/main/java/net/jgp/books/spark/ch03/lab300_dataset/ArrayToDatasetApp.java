@@ -1,4 +1,4 @@
-package net.jgp.books.spark.ch03.lab500Dataset;
+package net.jgp.books.spark.ch03.lab300_dataset;
 
 import java.util.Arrays;
 import java.util.List;

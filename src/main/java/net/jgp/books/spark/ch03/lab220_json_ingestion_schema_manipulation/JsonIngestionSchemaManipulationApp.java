@@ -1,13 +1,13 @@
 package net.jgp.books.spark.ch03.lab220_json_ingestion_schema_manipulation;
 
-import org.apache.spark.sql.Dataset;
-import org.apache.spark.sql.Row;
-import org.apache.spark.sql.SparkSession;
-import static org.apache.spark.sql.functions.lit;
 import static org.apache.spark.sql.functions.concat;
+import static org.apache.spark.sql.functions.lit;
 import static org.apache.spark.sql.functions.split;
 
 import org.apache.spark.Partition;
+import org.apache.spark.sql.Dataset;
+import org.apache.spark.sql.Row;
+import org.apache.spark.sql.SparkSession;
 
 /**
  * CSV ingestion in a dataframe.
@@ -37,7 +37,8 @@ public class JsonIngestionSchemaManipulationApp {
         .master("local[*]")
         .getOrCreate();
 
-    // Reads a JSON file called Restaurants_in_Durham_County_NC.json, stores it
+    // Reads a JSON file called Restaurants_in_Durham_County_NC.json, stores
+    // it
     // in a dataframe
     Dataset<Row> df = spark.read().format("json")
         .load("data/Restaurants_in_Durham_County_NC.json");

@@ -1,13 +1,13 @@
 package net.jgp.books.spark.ch03.lab230_dataframe_union;
 
-import org.apache.spark.sql.Dataset;
-import org.apache.spark.sql.Row;
-import org.apache.spark.sql.SparkSession;
-import static org.apache.spark.sql.functions.lit;
 import static org.apache.spark.sql.functions.concat;
+import static org.apache.spark.sql.functions.lit;
 import static org.apache.spark.sql.functions.split;
 
 import org.apache.spark.Partition;
+import org.apache.spark.sql.Dataset;
+import org.apache.spark.sql.Row;
+import org.apache.spark.sql.SparkSession;
 
 /**
  * Union of two dataframes.

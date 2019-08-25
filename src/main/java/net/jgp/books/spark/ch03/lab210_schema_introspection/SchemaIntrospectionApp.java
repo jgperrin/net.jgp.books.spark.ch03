@@ -29,7 +29,7 @@ public class SchemaIntrospectionApp {
    * The processing code.
    */
   private void start() {
-    
+
     // Similar to IngestionSchemaManipulationApp (no output)
     ////////////////////////////////////////////////////////////////////
 
@@ -39,7 +39,8 @@ public class SchemaIntrospectionApp {
         .master("local")
         .getOrCreate();
 
-    // Reads a CSV file with header, called books.csv, stores it in a dataframe
+    // Reads a CSV file with header, called books.csv, stores it in a
+    // dataframe
     Dataset<Row> df = spark.read().format("csv")
         .option("header", "true")
         .load("data/Restaurants_in_Wake_County_NC.csv");
@@ -64,12 +65,11 @@ public class SchemaIntrospectionApp {
         df.col("county"), lit("_"),
         df.col("datasetId")));
 
-
     // NEW
     ////////////////////////////////////////////////////////////////////
-    
+
     StructType schema = df.schema();
-    
+
     System.out.println("*** Schema as a tree:");
     schema.printTreeString();
     String schemaAsString = schema.mkString();

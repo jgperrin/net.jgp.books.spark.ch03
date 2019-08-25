@@ -26,8 +26,9 @@ public class CsvToDatasetBookToDataframeApp implements Serializable {
   private static final long serialVersionUID = -1L;
 
   /**
-   * This is a mapper class that will convert a Row to an instance of Book. You
-   * have full control over it - isn't it great that sometimes you have control?
+   * This is a mapper class that will convert a Row to an instance of Book.
+   * You have full control over it - isn't it great that sometimes you have
+   * control?
    * 
    * @author jgp
    */
@@ -97,7 +98,8 @@ public class CsvToDatasetBookToDataframeApp implements Serializable {
             expr("releaseDate.month + 1"), lit("-"),
             df2.col("releaseDate.date")));
     // Although you are getting a date out this process (pretty cool, huh?),
-    // this is not the recommended way to get a date. Have a look at chapter 7
+    // this is not the recommended way to get a date. Have a look at chapter
+    // 7
     // on ingestion for better ways.
     df2 = df2
         .withColumn(

@@ -13,7 +13,7 @@ import org.apache.spark.sql.SparkSession
   *
   * @author rambabu.posa
   */
-object IngestionSchemaManipuleApp {
+object IngestionSchemaManipulateApp {
 
   /**
     * main() is your entry point to the application.

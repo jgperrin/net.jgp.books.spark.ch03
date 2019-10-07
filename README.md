@@ -15,7 +15,7 @@ Labs:
 
 2. cd ${MY_HOME_DIR}/src/main/python
 
-3. Execute the following spark-submit command to create a jar file to our this application
+3. Execute the following spark-submit command to run this application
 ```
 spark-submit net/jgp/books/spark/ch03/lab200_ingestion_schema_manipulation/ingestionSchemaManipulationApp.py
 ```
@@ -30,9 +30,9 @@ spark-submit net/jgp/books/spark/ch03/lab200_ingestion_schema_manipulation/inges
     3. Create application jar file
        ```mvn clean package```
 
-    3. Execute the following spark-submit command to create a jar file to our this application
+    4. Execute the following spark-submit command to run this application
     ```
-    spark-submit net.jgp.books.spark.ch04.lab200_transformation_and_action.Transformation_ActionApp target/spark-chapter04-1.0.0-SNAPSHOT.jar
+    spark-submit --class net.jgp.books.spark.ch03.lab200_ingestion_schema_manipulation.IngestionSchemaManipulateApp target/sparkInAction2-chapter03-1.0.0-SNAPSHOT.jar
     ```
 
 

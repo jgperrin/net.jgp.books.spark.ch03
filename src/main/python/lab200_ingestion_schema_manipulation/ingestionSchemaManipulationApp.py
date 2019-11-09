@@ -3,20 +3,22 @@
 
   @author rambabu.posa
 """
-
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import lit,col,concat
+import os
+
+current_dir = os.path.dirname(__file__)
+relative_path = "../../../../data/Restaurants_in_Wake_County_NC.csv"
+absolute_file_path = os.path.join(current_dir, relative_path)
 
 # Creates a session on a local master
 spark = SparkSession.builder.appName("Restaurants in Wake County, NC") \
     .master("local[*]").getOrCreate()
 
-
 # Reads a CSV file with header, called
 # Restaurants_in_Wake_County_NC.csv,
 # stores it in a dataframe
-df = spark.read.csv(header=True, inferSchema=True,
-                      path="../../../data/Restaurants_in_Wake_County_NC.csv")
+df = spark.read.csv(header=True, inferSchema=True,path=absolute_file_path)
 
 print("*** Right after ingestion")
 df.show(5)
@@ -47,11 +49,8 @@ df = df.withColumn("id",
 print("*** Dataframe transformed")
 df.show(5)
 
-
 # for book only
-drop_cols=["address2","zip","tel","dateStart",
-           "geoX","geoY","address1","datasetId"]
-dfUsedForBook  =  df.drop(drop_cols)
+dfUsedForBook = df.drop("address2","zip","tel","dateStart","geoX","geoY","address1","datasetId")
 
 dfUsedForBook.show(5, 15)
 # end

@@ -9,7 +9,7 @@ import org.apache.spark.sql.{Dataset, Encoders, Row, SparkSession}
   *
   * @author rambabu.posa
   */
-object Array2Dataset2DataframeApp {
+object ArrayToDatasetToDataframeScalaApp {
 
   /**
     * main() is your entry point to the application.

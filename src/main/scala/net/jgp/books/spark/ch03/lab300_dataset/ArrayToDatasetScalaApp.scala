@@ -8,7 +8,7 @@ import org.apache.spark.sql.{Dataset, Encoders, SparkSession}
   *
   * @author rambabu.posa
   */
-object Array2DatasetApp {
+object ArrayToDatasetScalaApp {
 
   /**
     * main() is your entry point to the application.

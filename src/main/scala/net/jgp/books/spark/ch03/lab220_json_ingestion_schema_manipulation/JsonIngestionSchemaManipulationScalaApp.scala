@@ -8,7 +8,7 @@ import org.apache.spark.sql.SparkSession
   *
   * @author rambabu.posa
   */
-object JsonIngestionSchemaManipulateApp {
+object JsonIngestionSchemaManipulationScalaApp {
 
   /**
     * main() is your entry point to the application.

@@ -6,6 +6,11 @@
 
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import (lit,col,concat,split)
+import os
+
+current_dir = os.path.dirname(__file__)
+relative_path = "../../../../data/Restaurants_in_Durham_County_NC.json"
+absolute_file_path = os.path.join(current_dir, relative_path)
 
 # Creates a session on a local master
 spark = SparkSession.builder.appName("Restaurants in Durham County, NC") \
@@ -13,7 +18,7 @@ spark = SparkSession.builder.appName("Restaurants in Durham County, NC") \
 
 # Reads a JSON file called Restaurants_in_Durham_County_NC.json, stores
 # it in a dataframe
-df = spark.read.json("../../../data/Restaurants_in_Durham_County_NC.json")
+df = spark.read.json(relative_path)
 print("*** Right after ingestion")
 df.show(5)
 df.printSchema()

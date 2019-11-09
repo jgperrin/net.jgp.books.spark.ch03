@@ -13,7 +13,7 @@ import org.apache.spark.sql.{Dataset, Encoders, Row, SparkSession}
   *
   * @author rambabu.posa
   */
-object Csv2DatasetBook2DataframeApp {
+object CsvToDatasetBookToDataframeScalaApp {
 
   /**
     * This is a mapper class that will convert a Row to an instance of Book.

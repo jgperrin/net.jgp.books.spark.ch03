@@ -8,7 +8,7 @@ import org.apache.spark.sql.{Dataset, Row, SparkSession}
   *
   * @author rambabu.posa
   */
-object DataframesUnionApp {
+object DataframeUnionScalaApp {
 
   /**
     * main() is your entry point to the application.

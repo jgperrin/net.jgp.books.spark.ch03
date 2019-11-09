@@ -5,7 +5,12 @@
 """
 
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import lit,col,concat
+from pyspark.sql import functions as F
+import os
+
+current_dir = os.path.dirname(__file__)
+relative_path = "../../../../data/Restaurants_in_Wake_County_NC.csv"
+absolute_file_path = os.path.join(current_dir, relative_path)
 
 # Creates a session on a local master
 spark = SparkSession.builder.appName("Schema introspection for restaurants in Wake County, NC") \
@@ -14,11 +19,10 @@ spark = SparkSession.builder.appName("Schema introspection for restaurants in Wa
 # Reads a CSV file with header, called
 # Restaurants_in_Wake_County_NC.csv,
 # stores it in a dataframe
-df = spark.read.csv(header=True, inferSchema=True,
-                      path="../../../data/Restaurants_in_Wake_County_NC.csv")
+df = spark.read.csv(header=True, inferSchema=True,path=absolute_file_path)
 
 # Let's transform our dataframe
-df =  df.withColumn("county", lit("Wake")) \
+df =  df.withColumn("county", F.lit("Wake")) \
         .withColumnRenamed("HSISID", "datasetId") \
         .withColumnRenamed("NAME", "name") \
         .withColumnRenamed("ADDRESS1", "address1") \
@@ -33,7 +37,7 @@ df =  df.withColumn("county", lit("Wake")) \
         .withColumnRenamed("Y", "geoY")
 
 df = df.withColumn("id",
-        concat(col("state"), lit("_"), col("county"), lit("_"), col("datasetId")))
+        F.concat(F.col("state"), F.lit("_"), F.col("county"), F.lit("_"), F.col("datasetId")))
 
 # NEW
 #//////////////////////////////////////////////////////////////////
@@ -48,4 +52,5 @@ print("*** Schema as string: " + schemaAsString)
 schemaAsJson = schema.prettyjson
 print("*** Schema as JSON: " + schemaAsJson)
 
-df.stop()
+# Good to stop SparkSession at the end of the application
+spark.stop()

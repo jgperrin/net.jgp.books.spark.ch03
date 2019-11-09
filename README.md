@@ -7,34 +7,59 @@ Welcome to Spark with Java, chapter 3. This chapter is all about the dataframe, 
 Labs:
  * #200: `IngestionSchemaManipulationApp`: ingestion of a CSV, manipulation of schema structure post-ingestion
 
+## Running the lab in Java
 
-## Running PySpark
+For information on running the Java lab, see chapter 1 in [Spark in Action, 2nd edition](http://jgp.net/sia).
+
+
+## Running the lab using PySpark
+
+Prerequisites:
+
+You will need:
+ * `git`.
+ * Apache Spark (please refer Appendix P - 'Spark in production: installation and a few tips').
 
 1. Clone this project
-   Assume that cloned this project to ${MY_HOME_DIR}
 
-2. cd ${MY_HOME_DIR}/src/main/python
+    git clone https://github.com/jgperrin/net.jgp.books.spark.ch03
 
-3. Execute the following spark-submit command to run this application
-```
-spark-submit net/jgp/books/spark/ch03/lab200_ingestion_schema_manipulation/ingestionSchemaManipulationApp.py
-```
+2. Go to the lab in the Python directory
 
-## Running Scala
+    cd net.jgp.books.spark.ch03/src/main/python/lab200_ingestion_schema_manipulation/
 
-    1. Clone this project
-       Assume that cloned this project to ${MY_HOME_DIR}
+3. Execute the following spark-submit command to create a jar file to our this application
 
-    2. cd ${MY_HOME_DIR}
+   ```
+    spark-submit ingestionSchemaManipulationApp.py
+   ```
 
-    3. Create application jar file
-       ```mvn clean package```
+## Running the lab in Scala
 
-    4. Execute the following spark-submit command to run this application
-    ```
-    spark-submit --class net.jgp.books.spark.ch03.lab200_ingestion_schema_manipulation.IngestionSchemaManipulateApp target/sparkInAction2-chapter03-1.0.0-SNAPSHOT.jar
-    ```
+Prerequisites:
 
+You will need:
+ * `git`.
+ * Apache Spark (please refer Appendix P - 'Spark in production: installation and a few tips'). 
+
+
+1. Clone this project
+
+    git clone https://github.com/jgperrin/net.jgp.books.spark.ch03
+
+2. cd net.jgp.books.spark.ch03
+
+3. Package application using sbt command
+
+   ```
+     sbt clean assembly
+   ```
+
+4. Run Spark/Scala application using spark-submit command as shown below:
+
+   ```
+     spark-submit --class net.jgp.books.spark.ch03.lab200_ingestion_schema_manipulation.IngestionSchemaManipulationScalaApp target/scala-2.11/SparkInAction2-Chapter03-assembly-1.0.0.jar
+   ```
 
 Notes:
  1. Due to renaming the packages to match more closely Java standards, this project is not in sync with the book's MEAP prior to v10.

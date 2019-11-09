@@ -7,6 +7,7 @@
 from pyspark.sql import SparkSession
 from pyspark.sql import functions as F
 import os
+import json
 
 current_dir = os.path.dirname(__file__)
 relative_path = "../../../../data/Restaurants_in_Wake_County_NC.csv"
@@ -46,11 +47,11 @@ schema = df.schema
 print("*** Schema as a tree:")
 df.printSchema()
 
-# TODO: rest not working
-schemaAsString = schema.mkString
-print("*** Schema as string: " + schemaAsString)
-schemaAsJson = schema.prettyjson
-print("*** Schema as JSON: " + schemaAsJson)
+print("*** Schema as string: {}".format(df.schema))
+schemaAsJson = df.schema.json()
+parsedSchemaAsJson = json.loads(schemaAsJson)
+
+print("*** Schema as JSON: {}".format(json.dumps(parsedSchemaAsJson, indent=2)))
 
 # Good to stop SparkSession at the end of the application
 spark.stop()

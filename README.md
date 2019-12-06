@@ -22,13 +22,15 @@ You will need:
 
 1. Clone this project
 
-
-    git clone https://github.com/jgperrin/net.jgp.books.spark.ch03
-
+```
+git clone https://github.com/jgperrin/net.jgp.books.spark.ch03
+```
 
 2. Go to the lab in the Python directory
 
-    cd net.jgp.books.spark.ch03/src/main/python/lab200_ingestion_schema_manipulation/
+```
+cd net.jgp.books.spark.ch03/src/main/python/lab200_ingestion_schema_manipulation/
+```
 
 3. Execute the following spark-submit command to create a jar file to our this application
 

@@ -22,7 +22,9 @@ You will need:
 
 1. Clone this project
 
+
     git clone https://github.com/jgperrin/net.jgp.books.spark.ch03
+
 
 2. Go to the lab in the Python directory
 

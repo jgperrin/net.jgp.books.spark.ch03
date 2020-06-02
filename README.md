@@ -62,7 +62,7 @@ You will need:
 4. Run Spark/Scala application using spark-submit command as shown below:
 
    ```
-     spark-submit --class net.jgp.books.spark.ch03.lab200_ingestion_schema_manipulation.IngestionSchemaManipulationScalaApp target/scala-2.11/SparkInAction2-Chapter03-assembly-1.0.0.jar
+     spark-submit --class net.jgp.books.spark.ch03.lab200_ingestion_schema_manipulation.IngestionSchemaManipulationScalaApp target/scala-2.12/SparkInAction2-Chapter03-assembly-1.0.0.jar
    ```
 
 Notes: 

@@ -73,6 +73,8 @@ public class CsvToDatasetBookToDataframeApp implements Serializable {
         .master("local")
         .getOrCreate();
 
+    spark.sql("set spark.sql.legacy.timeParserPolicy=LEGACY");
+
     String filename = "data/books.csv";
     Dataset<Row> df = spark.read().format("csv")
         .option("inferSchema", "true")

@@ -73,6 +73,7 @@ public class CsvToDatasetBookToDataframeApp implements Serializable {
         .master("local")
         .getOrCreate();
 
+    // Needed by Spark v3.0.0 (Thanks @dapeng09)
     spark.sql("set spark.sql.legacy.timeParserPolicy=LEGACY");
 
     String filename = "data/books.csv";

@@ -4,13 +4,13 @@ The examples in this repository are support to the **[Spark in Action, 2nd editi
 
 Welcome to Spark in Action, 2nd edition, chapter 3. This chapter is all about the dataframe, understand its role and royalty!
 
-This code is designed to work with Apache Spark v3.0.0.
+This code is designed to work with Apache Spark v3.1.2.
 
 ## Labs
 
 ### Lab \#200
 
-`IngestionSchemaManipulationApp`: ingestion of a CSV, manipulation of schema structure post-ingestion
+`IngestionSchemaManipulationApp`: ingestion of a CSV file, manipulation of schema structure post-ingestion
 
 ## Running the labs
 
@@ -62,10 +62,15 @@ You will need:
 
     spark-submit --class net.jgp.books.spark.ch03.lab200_ingestion_schema_manipulation.IngestionSchemaManipulationScalaApp target/scala-2.12/SparkInAction2-Chapter03-assembly-1.0.0.jar
 
-Notes: 
+## News
+ 1. [2020-06-07] Updated the pom.xml to support Apache Spark v3.1.2. 
+ 1. [2020-06-07] As we celebrate the first anniversary of Spark in Action, 2nd edition is the best-rated Apache Spark book on [Amazon](https://amzn.to/2TPnmOv). 
+
+## Notes: 
  1. [Java] Due to renaming the packages to match more closely Java standards, this project is not in sync with the book's MEAP prior to v10 (published in April 2019).
- 2. [Scala, Python] As of MEAP v14, we have introduced Scala and Python examples (published in October 2019).
- 
+ 1. [Scala, Python] As of MEAP v14, we have introduced Scala and Python examples (published in October 2019).
+ 1. The master branch contains the last version of the code running against the latest supported version of Apache Spark. Look in specifics branches for specific versions.
+   
 ---
 
 Follow me on Twitter to get updates about the book and Apache Spark: [@jgperrin](https://twitter.com/jgperrin). Join the book's community on [Facebook](https://www.facebook.com/SparkWithJava/) or in [Manning's community site](https://forums.manning.com/forums/spark-in-action-second-edition?a_aid=jgp).

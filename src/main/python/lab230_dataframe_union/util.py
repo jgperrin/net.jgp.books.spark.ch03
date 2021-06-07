@@ -3,8 +3,8 @@
 
   Utility component to support union of two dataframes
 """
-
-from pyspark.sql.functions import (lit,col,concat,split)
+import logging
+from pyspark.sql.functions import F
 
 """
 * Builds the dataframe containing the Wake county restaurants
@@ -13,7 +13,7 @@ from pyspark.sql.functions import (lit,col,concat,split)
 """
 def build_wake_restaurants_dataframe(df):
     drop_cols = ["OBJECTID", "GEOCODESTATUS", "PERMITID"]
-    df = df.withColumn("county", lit("Wake")) \
+    df = df.withColumn("county", F.lit("Wake")) \
         .withColumnRenamed("HSISID", "datasetId") \
         .withColumnRenamed("NAME", "name") \
         .withColumnRenamed("ADDRESS1", "address1") \
@@ -23,14 +23,16 @@ def build_wake_restaurants_dataframe(df):
         .withColumnRenamed("POSTALCODE", "zip") \
         .withColumnRenamed("PHONENUMBER", "tel") \
         .withColumnRenamed("RESTAURANTOPENDATE", "dateStart") \
-        .withColumn("dateEnd", lit(None)) \
+        .withColumn("dateEnd", F.lit(None)) \
         .withColumnRenamed("FACILITYTYPE", "type") \
         .withColumnRenamed("X", "geoX") \
         .withColumnRenamed("Y", "geoY") \
         .drop("OBJECTID", "GEOCODESTATUS", "PERMITID")
 
     df = df.withColumn("id",
-                       concat(col("state"), lit("_"), col("county"), lit("_"), col("datasetId")))
+                       F.concat(F.col("state"), F.lit("_"),
+                                F.col("county"), F.lit("_"),
+                                F.col("datasetId")))
     # I left the following line if you want to play with repartitioning
     # df = df.repartition(4);
     return df
@@ -42,24 +44,26 @@ def build_wake_restaurants_dataframe(df):
 """
 def build_durham_restaurants_dataframe(df):
     drop_cols = ["fields", "geometry", "record_timestamp", "recordid"]
-    df =  df.withColumn("county", lit("Durham")) \
-            .withColumn("datasetId", col("fields.id")) \
-            .withColumn("name", col("fields.premise_name")) \
-            .withColumn("address1", col("fields.premise_address1")) \
-            .withColumn("address2", col("fields.premise_address2")) \
-            .withColumn("city", col("fields.premise_city")) \
-            .withColumn("state", col("fields.premise_state")) \
-            .withColumn("zip", col("fields.premise_zip")) \
-            .withColumn("tel", col("fields.premise_phone")) \
-            .withColumn("dateStart", col("fields.opening_date")) \
-            .withColumn("dateEnd", col("fields.closing_date")) \
-            .withColumn("type", split(col("fields.type_description"), " - ").getItem(1)) \
-            .withColumn("geoX", col("fields.geolocation").getItem(0)) \
-            .withColumn("geoY", col("fields.geolocation").getItem(1)) \
+    df =  df.withColumn("county", F.lit("Durham")) \
+            .withColumn("datasetId", F.col("fields.id")) \
+            .withColumn("name", F.col("fields.premise_name")) \
+            .withColumn("address1", F.col("fields.premise_address1")) \
+            .withColumn("address2", F.col("fields.premise_address2")) \
+            .withColumn("city", F.col("fields.premise_city")) \
+            .withColumn("state", F.col("fields.premise_state")) \
+            .withColumn("zip", F.col("fields.premise_zip")) \
+            .withColumn("tel", F.col("fields.premise_phone")) \
+            .withColumn("dateStart", F.col("fields.opening_date")) \
+            .withColumn("dateEnd", F.col("fields.closing_date")) \
+            .withColumn("type", F.split(F.col("fields.type_description"), " - ").getItem(1)) \
+            .withColumn("geoX", F.col("fields.geolocation").getItem(0)) \
+            .withColumn("geoY", F.col("fields.geolocation").getItem(1)) \
             .drop(*drop_cols)
 
     df = df.withColumn("id",
-                       concat(col("state"), lit("_"), col("county"), lit("_"), col("datasetId")))
+                       F.concat(F.col("state"), F.lit("_"),
+                                F.col("county"), F.lit("_"),
+                                F.col("datasetId")))
     # I left the following line if you want to play with repartitioning
     # df = df.repartition(4);
     return df
@@ -74,7 +78,7 @@ def combineDataframes(df1, df2):
     df = df1.unionByName(df2)
     df.show(5)
     df.printSchema()
-    print("We have {} records.".format(df.count()))
+    logging.warn("We have {} records.".format(df.count()))
     partition_count = df.rdd.getNumPartitions()
-    print("Partition count: {}".format(partition_count))
+    logging.warn("Partition count: {}".format(partition_count))
 

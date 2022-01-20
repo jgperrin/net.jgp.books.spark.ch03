@@ -42,8 +42,8 @@ object JsonIngestionSchemaManipulationScalaApp {
           .withColumn("dateStart", col("fields.opening_date"))
           .withColumn("dateEnd", col("fields.closing_date"))
           .withColumn("type", split(col("fields.type_description"), " - ").getItem(1))
-          .withColumn("geoX", col("fields.geolocation").getItem(0))
-          .withColumn("geoY", col("fields.geolocation").getItem(1))
+          .withColumn("geoX", col("fields.geolocation").getItem(1))
+          .withColumn("geoY", col("fields.geolocation").getItem(0))
 
     val cols_list = List(col("state"), lit("_"), col("county"), lit("_"), col("datasetId"))
 

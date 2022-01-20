@@ -95,8 +95,8 @@ object DataframeUnionScalaApp {
                 .withColumn("dateStart", col("fields.opening_date"))
                 .withColumn("dateEnd", col("fields.closing_date"))
                 .withColumn("type", split(col("fields.type_description"), " - ").getItem(1))
-                .withColumn("geoX", col("fields.geolocation").getItem(0))
-                .withColumn("geoY", col("fields.geolocation").getItem(1))
+                .withColumn("geoX", col("fields.geolocation").getItem(1))
+                .withColumn("geoY", col("fields.geolocation").getItem(0))
                 .drop(drop_cols:_*)
 
     df1 = df1.withColumn("id",

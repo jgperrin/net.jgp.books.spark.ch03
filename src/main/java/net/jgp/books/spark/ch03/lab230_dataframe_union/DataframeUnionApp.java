@@ -121,8 +121,8 @@ public class DataframeUnionApp {
         .withColumn("dateEnd", df.col("fields.closing_date"))
         .withColumn("type",
             split(df.col("fields.type_description"), " - ").getItem(1))
-        .withColumn("geoX", df.col("fields.geolocation").getItem(0))
-        .withColumn("geoY", df.col("fields.geolocation").getItem(1))
+        .withColumn("geoX", df.col("fields.geolocation").getItem(1))
+        .withColumn("geoY", df.col("fields.geolocation").getItem(0))
         .drop(df.col("fields"))
         .drop(df.col("geometry"))
         .drop(df.col("record_timestamp"))

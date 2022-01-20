@@ -56,8 +56,8 @@ def build_durham_restaurants_dataframe(df):
             .withColumn("dateStart", F.col("fields.opening_date")) \
             .withColumn("dateEnd", F.col("fields.closing_date")) \
             .withColumn("type", F.split(F.col("fields.type_description"), " - ").getItem(1)) \
-            .withColumn("geoX", F.col("fields.geolocation").getItem(0)) \
-            .withColumn("geoY", F.col("fields.geolocation").getItem(1)) \
+            .withColumn("geoX", F.col("fields.geolocation").getItem(1)) \
+            .withColumn("geoY", F.col("fields.geolocation").getItem(0)) \
             .drop(*drop_cols)
 
     df = df.withColumn("id",
